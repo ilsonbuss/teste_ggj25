@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://ca2ke7q7r3hmw"]
+
+[ext_resource type="SphereMesh" uid="uid://dxkqfl60lcqdi" path="res://bubble.tres" id="1_0ws21"]
+
+[sub_resource type="Curve" id="Curve_3gf0c"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_aamyx"]
+curve = SubResource("Curve_3gf0c")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_04eel"]
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, -0.5, 0)
+scale_min = 0.3
+scale_curve = SubResource("CurveTexture_aamyx")
+
+[node name="Bolhas" type="GPUParticles3D"]
+amount = 20
+lifetime = 5.0
+process_material = SubResource("ParticleProcessMaterial_04eel")
+draw_pass_1 = ExtResource("1_0ws21")

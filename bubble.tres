@@ -1,0 +1,13 @@
+[gd_resource type="SphereMesh" load_steps=3 format=3 uid="uid://dxkqfl60lcqdi"]
+
+[ext_resource type="Shader" uid="uid://dk48bi2k4sjgr" path="res://bubble.gdshader" id="1_8hsf3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cwb2r"]
+render_priority = 0
+shader = ExtResource("1_8hsf3")
+shader_parameter/iridescence_strength = 0.8
+shader_parameter/bubble_color = Color(1, 1, 1, 1)
+shader_parameter/transparency = 0.5
+
+[resource]
+material = SubResource("ShaderMaterial_cwb2r")

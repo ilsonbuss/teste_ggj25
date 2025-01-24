@@ -1,0 +1,186 @@
+[gd_scene load_steps=22 format=3 uid="uid://b4q8jhv657nuq"]
+
+[ext_resource type="PackedScene" uid="uid://cj68lx5kdhmss" path="res://bolha.tscn" id="1_5fec0"]
+[ext_resource type="Script" uid="uid://bl53wbyteq25l" path="res://player.gd" id="2_hfydk"]
+[ext_resource type="PackedScene" uid="uid://ca2ke7q7r3hmw" path="res://bolhas.tscn" id="2_xellr"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xgt2m"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_5fec0"]
+sky_material = SubResource("ProceduralSkyMaterial_xgt2m")
+
+[sub_resource type="Environment" id="Environment_xellr"]
+background_mode = 2
+sky = SubResource("Sky_5fec0")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xgt2m"]
+albedo_color = Color(0, 0.45, 0.0975, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5fec0"]
+material = SubResource("StandardMaterial3D_xgt2m")
+size = Vector2(10, 10)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_xgt2m"]
+data = PackedVector3Array(5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, 5, -5, 0, -5, 5, 0, -5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xellr"]
+albedo_color = Color(0.739622, 0.602903, 0.300948, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_hfydk"]
+material = SubResource("StandardMaterial3D_xellr")
+left_to_right = -2.0
+size = Vector3(2, 4, 2)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5fec0"]
+data = PackedVector3Array(-5, 2, 1, 1, -2, 1, -1, -2, 1, -5, 2, -1, -1, -2, -1, 1, -2, -1, -5, 2, 1, -5, 2, -1, 1, -2, 1, -5, 2, -1, 1, -2, -1, 1, -2, 1, -5, 2, -1, -5, 2, 1, -1, -2, -1, -5, 2, 1, -1, -2, 1, -1, -2, -1, -1, -2, 1, 1, -2, 1, -1, -2, -1, 1, -2, 1, 1, -2, -1, -1, -2, -1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5fec0"]
+albedo_color = Color(0, 0.45, 0.0975, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xellr"]
+material = SubResource("StandardMaterial3D_5fec0")
+size = Vector3(5, 4, 5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_xellr"]
+data = PackedVector3Array(-2.5, 2, 2.5, 2.5, 2, 2.5, -2.5, -2, 2.5, 2.5, 2, 2.5, 2.5, -2, 2.5, -2.5, -2, 2.5, 2.5, 2, -2.5, -2.5, 2, -2.5, 2.5, -2, -2.5, -2.5, 2, -2.5, -2.5, -2, -2.5, 2.5, -2, -2.5, 2.5, 2, 2.5, 2.5, 2, -2.5, 2.5, -2, 2.5, 2.5, 2, -2.5, 2.5, -2, -2.5, 2.5, -2, 2.5, -2.5, 2, -2.5, -2.5, 2, 2.5, -2.5, -2, -2.5, -2.5, 2, 2.5, -2.5, -2, 2.5, -2.5, -2, -2.5, 2.5, 2, 2.5, -2.5, 2, 2.5, 2.5, 2, -2.5, -2.5, 2, 2.5, -2.5, 2, -2.5, 2.5, 2, -2.5, -2.5, -2, 2.5, 2.5, -2, 2.5, -2.5, -2, -2.5, 2.5, -2, 2.5, 2.5, -2, -2.5, -2.5, -2, -2.5)
+
+[sub_resource type="SphereMesh" id="SphereMesh_xgt2m"]
+radius = 0.25
+height = 0.5
+radial_segments = 32
+rings = 16
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5fec0"]
+radius = 0.25
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hfydk"]
+size = Vector3(1.4624, 2, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hfydk"]
+albedo_color = Color(0.9154, 0.499806, 3.85046e-07, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hfydk"]
+material = SubResource("StandardMaterial3D_hfydk")
+radius = 0.125
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3ooa4"]
+
+[node name="Avalanche" type="Node3D"]
+metadata/movie_file = "/home/ilson/Downloads/godot_ava.avi"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xellr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Chao" type="StaticBody3D" parent="."]
+
+[node name="Mesh" type="MeshInstance3D" parent="Chao"]
+mesh = SubResource("PlaneMesh_5fec0")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Chao"]
+shape = SubResource("ConcavePolygonShape3D_xgt2m")
+
+[node name="Rampa" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.68925, 0, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Rampa"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00115, 0)
+mesh = SubResource("PrismMesh_hfydk")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rampa"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00115, 0)
+shape = SubResource("ConcavePolygonShape3D_5fec0")
+
+[node name="Topo" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.50658, 1.99, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Topo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.722147, -1.00215, 0)
+mesh = SubResource("BoxMesh_xellr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Topo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.722147, -1.00215, 0)
+shape = SubResource("ConcavePolygonShape3D_xellr")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.75944, 1.35895, -0.0597515)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.48113, 3.72735, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("SphereMesh_xgt2m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_5fec0")
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.48113, 6.13446, -0.599149)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2"]
+mesh = SubResource("SphereMesh_xgt2m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
+shape = SubResource("SphereShape3D_5fec0")
+
+[node name="RigidBody3D3" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.48113, 9.07231, 0.440412)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D3"]
+mesh = SubResource("SphereMesh_xgt2m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3"]
+shape = SubResource("SphereShape3D_5fec0")
+
+[node name="RigidBody3D4" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.48113, 11.0763, -0.430695)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.35432)
+mesh = SubResource("SphereMesh_xgt2m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D4"]
+shape = SubResource("SphereShape3D_5fec0")
+
+[node name="Bolhas" parent="." instance=ExtResource("2_xellr")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.68232, 3.08421, -0.210268)
+visible = false
+amount = 100
+
+[node name="Area3D" type="Area3D" parent="Bolhas"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bolhas/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.768799, 0, 0)
+shape = SubResource("BoxShape3D_hfydk")
+
+[node name="Player" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.139, 1.12091, 0)
+mass = 0.25
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("2_hfydk")
+move_speed = 5.0
+jump_force = 40.0
+
+[node name="bolha" parent="Player" instance=ExtResource("1_5fec0")]
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/bolha"]
+mesh = SubResource("CapsuleMesh_hfydk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("SphereShape3D_3ooa4")
+
+[connection signal="body_exited" from="Bolhas/Area3D" to="Player" method="_on_area_3d_body_exited"]

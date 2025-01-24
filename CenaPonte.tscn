@@ -1,0 +1,335 @@
+[gd_scene load_steps=14 format=3 uid="uid://ch5iarj2ngnan"]
+
+[ext_resource type="Material" uid="uid://di418vpayrha2" path="res://bubble.material" id="1_bbfsj"]
+[ext_resource type="PackedScene" uid="uid://cj68lx5kdhmss" path="res://bolha.tscn" id="2_drmx6"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_drmx6"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_6v068"]
+sky_material = SubResource("ProceduralSkyMaterial_drmx6")
+
+[sub_resource type="Environment" id="Environment_ag6ky"]
+background_mode = 2
+sky = SubResource("Sky_6v068")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f2ww8"]
+albedo_color = Color(0, 0.45, 0.0975, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bbfsj"]
+material = SubResource("StandardMaterial3D_f2ww8")
+size = Vector3(10, 5, 10)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_drmx6"]
+data = PackedVector3Array(-5, 2.5, 5, 5, 2.5, 5, -5, -2.5, 5, 5, 2.5, 5, 5, -2.5, 5, -5, -2.5, 5, 5, 2.5, -5, -5, 2.5, -5, 5, -2.5, -5, -5, 2.5, -5, -5, -2.5, -5, 5, -2.5, -5, 5, 2.5, 5, 5, 2.5, -5, 5, -2.5, 5, 5, 2.5, -5, 5, -2.5, -5, 5, -2.5, 5, -5, 2.5, -5, -5, 2.5, 5, -5, -2.5, -5, -5, 2.5, 5, -5, -2.5, 5, -5, -2.5, -5, 5, 2.5, 5, -5, 2.5, 5, 5, 2.5, -5, -5, 2.5, 5, -5, 2.5, -5, 5, 2.5, -5, -5, -2.5, 5, 5, -2.5, 5, -5, -2.5, -5, 5, -2.5, 5, 5, -2.5, -5, -5, -2.5, -5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_drmx6"]
+material = ExtResource("1_bbfsj")
+size = Vector3(5, 0.33, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6v068"]
+size = Vector3(5, 0.33, 1)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f2ww8"]
+friction = 0.5
+rough = true
+bounce = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_6v068"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ag6ky"]
+
+[node name="CenaPonte" type="Node3D"]
+metadata/movie_file = "/home/ilson/Downloads/godot.avi"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ag6ky")
+
+[node name="Ponte" type="Node3D" parent="."]
+
+[node name="Comeco" type="StaticBody3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15)
+
+[node name="Chao1" type="MeshInstance3D" parent="Ponte/Comeco"]
+mesh = SubResource("BoxMesh_bbfsj")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ponte/Comeco"]
+shape = SubResource("ConcavePolygonShape3D_drmx6")
+
+[node name="Joint1" type="PinJoint3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.46101, 9.92369)
+node_a = NodePath("../Comeco")
+node_b = NodePath("../Tabua1")
+
+[node name="Tabua1" type="RigidBody3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33905, 9.35256)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ponte/Tabua1"]
+mesh = SubResource("BoxMesh_drmx6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ponte/Tabua1"]
+shape = SubResource("BoxShape3D_6v068")
+
+[node name="Joint2" type="PinJoint3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47321, 8.75269)
+node_a = NodePath("../Tabua1")
+node_b = NodePath("../Tabua2")
+
+[node name="Tabua2" type="RigidBody3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33905, 8.16936)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ponte/Tabua2"]
+mesh = SubResource("BoxMesh_drmx6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ponte/Tabua2"]
+shape = SubResource("BoxShape3D_6v068")
+
+[node name="Joint3" type="PinJoint3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47321, 7.55803)
+node_a = NodePath("../Tabua2")
+node_b = NodePath("../Tabua3")
+
+[node name="Tabua3" type="RigidBody3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33905, 6.97471)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ponte/Tabua3"]
+mesh = SubResource("BoxMesh_drmx6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ponte/Tabua3"]
+shape = SubResource("BoxShape3D_6v068")
+
+[node name="Joint4" type="PinJoint3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47321, 6.39656)
+node_a = NodePath("../Tabua3")
+node_b = NodePath("../Tabua4")
+
+[node name="Tabua4" type="RigidBody3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33905, 5.81324)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ponte/Tabua4"]
+mesh = SubResource("BoxMesh_drmx6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ponte/Tabua4"]
+shape = SubResource("BoxShape3D_6v068")
+
+[node name="Joint5" type="PinJoint3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47321, 5.23509)
+node_a = NodePath("../Tabua4")
+node_b = NodePath("../Tabua5")
+
+[node name="Tabua5" type="RigidBody3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33905, 4.65177)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ponte/Tabua5"]
+mesh = SubResource("BoxMesh_drmx6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ponte/Tabua5"]
+shape = SubResource("BoxShape3D_6v068")
+
+[node name="Joint6" type="PinJoint3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47321, 4.04044)
+node_a = NodePath("../Tabua5")
+node_b = NodePath("../Tabua6")
+
+[node name="Tabua6" type="RigidBody3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33905, 3.45711)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ponte/Tabua6"]
+mesh = SubResource("BoxMesh_drmx6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ponte/Tabua6"]
+shape = SubResource("BoxShape3D_6v068")
+
+[node name="Joint7" type="PinJoint3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47321, 2.86237)
+node_a = NodePath("../Tabua6")
+node_b = NodePath("../Tabua7")
+
+[node name="Tabua7" type="RigidBody3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33905, 2.27905)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ponte/Tabua7"]
+mesh = SubResource("BoxMesh_drmx6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ponte/Tabua7"]
+shape = SubResource("BoxShape3D_6v068")
+
+[node name="Joint8" type="PinJoint3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47321, 1.65113)
+node_a = NodePath("../Tabua7")
+node_b = NodePath("../Tabua8")
+
+[node name="Tabua8" type="RigidBody3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33905, 1.0678)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ponte/Tabua8"]
+mesh = SubResource("BoxMesh_drmx6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ponte/Tabua8"]
+shape = SubResource("BoxShape3D_6v068")
+
+[node name="Joint9" type="PinJoint3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47321, 0.489657)
+node_a = NodePath("../Tabua8")
+node_b = NodePath("../Tabua9")
+
+[node name="Tabua9" type="RigidBody3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33905, -0.0936658)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ponte/Tabua9"]
+mesh = SubResource("BoxMesh_drmx6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ponte/Tabua9"]
+shape = SubResource("BoxShape3D_6v068")
+
+[node name="Joint10" type="PinJoint3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47321, -0.688405)
+node_a = NodePath("../Tabua9")
+node_b = NodePath("../Tabua10")
+
+[node name="Tabua10" type="RigidBody3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33905, -1.27173)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ponte/Tabua10"]
+mesh = SubResource("BoxMesh_drmx6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ponte/Tabua10"]
+shape = SubResource("BoxShape3D_6v068")
+
+[node name="Joint11" type="PinJoint3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47321, -1.88306)
+node_a = NodePath("../Tabua10")
+node_b = NodePath("../Tabua11")
+
+[node name="Tabua11" type="RigidBody3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33905, -2.46638)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ponte/Tabua11"]
+mesh = SubResource("BoxMesh_drmx6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ponte/Tabua11"]
+shape = SubResource("BoxShape3D_6v068")
+
+[node name="Joint12" type="PinJoint3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47321, -3.07771)
+node_a = NodePath("../Tabua11")
+node_b = NodePath("../Tabua12")
+
+[node name="Tabua12" type="RigidBody3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33905, -3.66104)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ponte/Tabua12"]
+mesh = SubResource("BoxMesh_drmx6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ponte/Tabua12"]
+shape = SubResource("BoxShape3D_6v068")
+
+[node name="Joint13" type="PinJoint3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47321, -4.28896)
+node_a = NodePath("../Tabua12")
+node_b = NodePath("../Tabua13")
+
+[node name="Tabua13" type="RigidBody3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33905, -4.87228)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ponte/Tabua13"]
+mesh = SubResource("BoxMesh_drmx6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ponte/Tabua13"]
+shape = SubResource("BoxShape3D_6v068")
+
+[node name="Joint14" type="PinJoint3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47321, -5.46702)
+node_a = NodePath("../Tabua13")
+node_b = NodePath("../Tabua14")
+
+[node name="Tabua14" type="RigidBody3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33905, -6.05035)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ponte/Tabua14"]
+mesh = SubResource("BoxMesh_drmx6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ponte/Tabua14"]
+shape = SubResource("BoxShape3D_6v068")
+
+[node name="Joint15" type="PinJoint3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47321, -6.66168)
+node_a = NodePath("../Tabua14")
+node_b = NodePath("../Tabua15")
+
+[node name="Tabua15" type="RigidBody3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33905, -7.245)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ponte/Tabua15"]
+mesh = SubResource("BoxMesh_drmx6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ponte/Tabua15"]
+shape = SubResource("BoxShape3D_6v068")
+
+[node name="Joint16" type="PinJoint3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47321, -7.85633)
+node_a = NodePath("../Tabua15")
+node_b = NodePath("../Tabua16")
+
+[node name="Tabua16" type="RigidBody3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33905, -8.43966)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ponte/Tabua16"]
+mesh = SubResource("BoxMesh_drmx6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ponte/Tabua16"]
+shape = SubResource("BoxShape3D_6v068")
+
+[node name="Joint17" type="PinJoint3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47321, -9.05099)
+node_a = NodePath("../Tabua16")
+node_b = NodePath("../Tabua17")
+
+[node name="Tabua17" type="RigidBody3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33905, -9.63431)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ponte/Tabua17"]
+mesh = SubResource("BoxMesh_drmx6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ponte/Tabua17"]
+shape = SubResource("BoxShape3D_6v068")
+
+[node name="Joint18" type="PinJoint3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47321, -10.2209)
+node_a = NodePath("../Tabua17")
+node_b = NodePath("../Fim")
+
+[node name="Fim" type="StaticBody3D" parent="Ponte"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15.2821)
+
+[node name="Chao1" type="MeshInstance3D" parent="Ponte/Fim"]
+mesh = SubResource("BoxMesh_bbfsj")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ponte/Fim"]
+shape = SubResource("ConcavePolygonShape3D_drmx6")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.0224861, -0.226974, 0.973641, -0.00524055, 0.973901, 0.226914, -0.999733, -1.39761e-09, -0.0230887, 14.85, 5.54995, 0.00325394)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.87016, 10.1624)
+mass = 15.0
+physics_material_override = SubResource("PhysicsMaterial_f2ww8")
+inertia = Vector3(1, 1, 1)
+linear_velocity = Vector3(0, 0, -2)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("SphereMesh_6v068")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_ag6ky")
+
+[node name="bolha" parent="RigidBody3D" instance=ExtResource("2_drmx6")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.475793, 0.879557, 0, -0.879557, -0.475793, 0, 17.1262, -0.645421)
