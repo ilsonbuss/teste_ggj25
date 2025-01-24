@@ -5,6 +5,7 @@ extends RigidBody3D
 @export var jump_force: float = 15.0
 @export var air_control: float = 0.3
 @export var max_slope_angle: float = 45.0
+@export var force_position: Node3D
 
 # Internal state
 var velocity: Vector3
@@ -16,6 +17,7 @@ var camera: Camera3D
 
 func _ready():
 	camera = %Camera3D
+	#apply_impulse(Vector3.ZERO, Vector3(0, 0, -10))
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -63,7 +65,10 @@ func apply_movement_force(delta: float) -> void:
 
 	# Apply force for movement
 	var movement_force: Vector3 = direction * move_speed * control_factor
-	apply_central_force(movement_force)
+	if force_position:
+		apply_force(movement_force, force_position.position)
+	else:
+		apply_central_force(movement_force)
 
 var on_floor = true
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:

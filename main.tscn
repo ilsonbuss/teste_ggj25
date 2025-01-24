@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dl15okoc4ewqr"]
+[gd_scene load_steps=5 format=3 uid="uid://dl15okoc4ewqr"]
 
 [ext_resource type="PackedScene" uid="uid://ca2ke7q7r3hmw" path="res://bolhas.tscn" id="2_0xm2m"]
 [ext_resource type="Material" uid="uid://di418vpayrha2" path="res://bubble.material" id="2_h2yge"]
@@ -25,8 +25,6 @@ fog_height_density = 0.1
 fog_depth_begin = 5.0
 fog_depth_end = 50.0
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_0xm2m"]
-
 [node name="Main" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -41,15 +39,9 @@ skeleton = NodePath("")
 
 [node name="Bolhas" parent="." instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.127726, 0)
-visible = false
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.996036, 0, -0.0889464, 0.0450327, 0.862363, 0.504283, 0.0767042, -0.50629, 0.858945, 0, 1.34172, 1.50498)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0xm2m")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-mesh = SubResource("CylinderMesh_0xm2m")
